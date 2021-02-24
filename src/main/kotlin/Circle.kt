@@ -21,6 +21,8 @@ class Circle(override val name: String = "Circle №${counter + 1}",
 
     override fun erase() = println("Erase the circle $name, id: $id")
 
+    fun arcLength() = "Нou have not entered an angle. Circumference is ${circumference()}"
+    fun arcLength(angle: Double) = println("My arc length is ${calculateArcLength(angle)}")
 
-
+    private fun calculateArcLength(angle: Double): Double = angle * radius
 }

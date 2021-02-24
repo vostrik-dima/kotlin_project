@@ -29,4 +29,10 @@ class Triangle(override val name: String = "Triangle №${counter + 1}",
     override fun draw() = println("Drawing the triangle $name, color: $color, isosceles: $isosceles, id: $id")
 
     override fun erase() = println("Erase the triangle $name, id: $id")
+
+    fun showId() = println("My id is $id")
+    fun showId(showQuantity: Boolean) {
+        if (showQuantity) println("My id is $id. Our quantity is $counter")
+        else println("My id is $id. I don't say our quantity")
+    }
 }
