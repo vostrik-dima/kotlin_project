@@ -1,14 +1,11 @@
-class Circle(override val name: String = "Circle №${counter + 1}", override val color: String,
+class Circle(override val name: String = "Circle №${counter + 1}",
+             override val color: String,
              private val radius: Double) : Figure {
 
     private val id: Int
 
     companion object {
         var counter: Int = 0
-
-        fun counter(): Int {
-            return counter
-        }
     }
 
     init {

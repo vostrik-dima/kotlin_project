@@ -8,7 +8,6 @@ fun main() {
     circle2.myCircumference()
     circle3.myCircumference()
 
-
     val triangle1: Triangle = Triangle("mr brown", "brown", 2.0, 3.0, 4.0)
     val triangle2: Triangle = Triangle(color = "brown", sideA =  2.0)
 

@@ -1,6 +1,7 @@
 import kotlin.math.sqrt
 
-class Triangle(override val name: String = "Triangle №${counter + 1}", override val color: String,
+class Triangle(override val name: String = "Triangle №${counter + 1}",
+               override val color: String,
                private val sideA: Double,
                private val sideB: Double = sideA,
                private val sideC: Double = sideA) : Figure {
@@ -10,10 +11,6 @@ class Triangle(override val name: String = "Triangle №${counter + 1}", overrid
 
     companion object {
         var counter: Int = 0
-
-        fun counter(): Int {
-            return counter
-        }
     }
 
     init {
