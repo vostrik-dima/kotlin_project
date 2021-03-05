@@ -3,13 +3,7 @@ class MyStack<T> {
 
     private fun isEmpty() = elements.isEmpty()
     fun push(item: T) = elements.add(item)
-    fun pop() : T? {
-        val item = elements.lastOrNull()
-        if (!isEmpty()){
-            elements.removeAt(elements.size -1)
-        }
-        return item
-    }
+    fun pop() : T? = elements.removeLastOrNull()
 
     override fun toString(): String = elements.toString()
 }

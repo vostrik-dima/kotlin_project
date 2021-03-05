@@ -3,7 +3,7 @@ class MyQueue<T> {
 
     private fun isEmpty() = elements.isEmpty()
     fun enqueue(item: T) = elements.add(item)
-    fun dequeue() = if (!isEmpty()) elements.removeAt(0) else null
+    fun dequeue() = elements.removeFirstOrNull()
 
     override fun toString(): String = elements.toString()
 }
