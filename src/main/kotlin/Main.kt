@@ -1,25 +1,15 @@
 import dao.CatDao
 import dao.PersonDAO
-import models.Cat
-import models.Person
+import service.Service
 
 fun main() {
+    val personDAO = PersonDAO()
+    val catDao = CatDao()
 
-    val d = PersonDAO(listOf(Person("Bob", 22), Person("kot", 33)))
+    val service = Service()
 
-//    println(d.getPerson())
-
-//    val dd = CatDao(listOf(Cat("пушок", Breed.MUNCHKIN, 2),
-//        Cat("царапка", Breed.SIAMESE, 1)
-//    ))
-//    val dd = CatDao(listOf(Cat("пушок", 2),
-//        Cat("царапка", 1)
-//    ))
-//    val result = d.getPersons().ass(dd.getCats()) {}
-//
-//    println()
-
-    val numbers = listOf("one", "two", "three", "four")
-    val result = numbers.associateWith { it.length }
-
+    service.zipLists(personDAO.getPersons(), catDao.getCats())
+    println(service.sortById())
+    println(service.groupById())
+    println(service.countById(1))
 }
