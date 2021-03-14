@@ -3,7 +3,6 @@ package service
 import dao.CatDao
 import dao.PersonDAO
 import models.PersonWithCat
-import javax.sql.rowset.Predicate
 
 class Service {
 

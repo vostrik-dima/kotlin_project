@@ -1,5 +1,3 @@
-import dao.CatDao
-import dao.PersonDAO
 import service.Service
 
 fun main() {
