@@ -2,10 +2,11 @@ package dao
 
 import models.Person
 
-class PersonDAO() {
+class PersonDAO {
 
     private val persons: List<Person> = listOf(Person("Боб", 22), Person("Роб", 33))
 
+
     fun getPersons(): List<Person> = persons
-    fun getPerson(id: Int): Person? = persons.filter { it.id == id }.getOrNull(0)
+    fun getPerson(id: Int): Person? = persons.firstOrNull { it.id == id }
 }

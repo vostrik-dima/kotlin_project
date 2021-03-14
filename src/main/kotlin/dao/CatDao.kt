@@ -2,7 +2,7 @@ package dao
 
 import models.Cat
 
-class CatDao() {
+class CatDao {
 
     private val cats: List<Cat> = listOf(
         Cat("пушок", "манчикин", 1),
@@ -10,5 +10,5 @@ class CatDao() {
     )
 
     fun getCats(): List<Cat> = cats
-    fun getCat(ownerID: Int): Cat? = cats.filter { it.ownerID == ownerID }.getOrNull(0)
+    fun getCat(ownerID: Int): Cat? = cats.firstOrNull { it.ownerID == ownerID }
 }

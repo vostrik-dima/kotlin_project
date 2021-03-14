@@ -1,16 +1,20 @@
 package service
 
-import models.Cat
-import models.Person
+import dao.CatDao
+import dao.PersonDAO
 import models.PersonWithCat
+import javax.sql.rowset.Predicate
 
 class Service {
 
-    lateinit var personWithCat: List<PersonWithCat>
+    var personWithCat: List<PersonWithCat> = ArrayList<PersonWithCat>()
+    private val personDAO = PersonDAO()
+    private val catDao = CatDao()
 
     // пункт 5a
-    fun zipLists(persons: List<Person>, cats: List<Cat>) {
-        personWithCat = persons.zip(cats) {p, c -> PersonWithCat(p.id, p.name, p.age, c.nickname, c.breed, c.ownerID) }
+    fun zipLists() {
+        personWithCat = personDAO.getPersons().zip(catDao.getCats()) {person, cat ->
+            PersonWithCat(person.id, person.name, person.age, cat.nickname, cat.breed, cat.ownerID) }
     }
 
     //пункт 5b
