@@ -76,10 +76,7 @@ class SponsorDAO(private val connection: Connection) : DAO<Sponsor> {
         }
     }
 
-    override fun getByIdMoreThanTwo(): List<Sponsor> {
-        val sql = "SELECT * FROM SPONSORS WHERE id > 2"
-        return executeList(sql)
-    }
+    fun getByIdMoreThanTwo(): List<Sponsor> =executeList("SELECT * FROM SPONSORS WHERE id > 2")
 
     private fun executeList(sql: String): List<Sponsor> {
         val statement = connection.createStatement()
@@ -102,26 +99,5 @@ class SponsorDAO(private val connection: Connection) : DAO<Sponsor> {
         }
     }
 
-    override fun getSort(): List<Sponsor> {
-        val sql = "SELECT * FROM SPONSORS ORDER BY id DESC;"
-        return executeList(sql)
-//        val statement = connection.createStatement()
-//        val sponsorList = ArrayList<Sponsor>()
-//        try {
-//            val resultSet = statement.executeQuery(sql)
-//            while (resultSet.next())
-//                sponsorList.add(
-//                    Sponsor(
-//                        resultSet.getInt("id"), resultSet.getString("name"),
-//                        resultSet.getInt("budget")
-//                    )
-//                )
-//            return sponsorList
-//        } catch (e: SQLException) {
-//            println(e.message)
-//            return sponsorList
-//        } finally {
-//            statement.close()
-//        }
-    }
+    fun getSort(): List<Sponsor> =executeList("SELECT * FROM SPONSORS ORDER BY id DESC;")
 }

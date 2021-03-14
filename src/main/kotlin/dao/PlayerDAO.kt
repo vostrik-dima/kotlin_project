@@ -82,28 +82,7 @@ class PlayerDAO(private val connection: Connection) : DAO<Player> {
         }
     }
 
-    override fun getByIdMoreThanTwo(): List<Player> = executeList("SELECT * FROM PLAYERS WHERE id > 2;")
-//        val sql = "SELECT * FROM PLAYERS WHERE id > 2;"
-//        val statement = connection.createStatement()
-//        val playerList = ArrayList<Player>()
-//        try {
-//            val resultSet = statement.executeQuery(sql)
-//            while (resultSet.next())
-//                playerList.add(
-//                    Player(
-//                        resultSet.getInt("id"), resultSet.getString("name"),
-//                        resultSet.getString("surname"), resultSet.getInt("number"),
-//                        resultSet.getInt("footballClubID")
-//                    )
-//                )
-//            return playerList
-//        } catch (e: SQLException) {
-//            println(e.message)
-//            return playerList
-//        } finally {
-//            statement.close()
-//        }
-//    }
+    fun getByIdMoreThanTwo(): List<Player> = executeList("SELECT * FROM PLAYERS WHERE id > 2;")
 
     private fun executeList(sql: String): List<Player> {
         val statement = connection.createStatement()
@@ -127,26 +106,5 @@ class PlayerDAO(private val connection: Connection) : DAO<Player> {
         }
     }
 
-    override fun getSort(): List<Player> = executeList("SELECT * FROM PLAYERS ORDER BY id DESC;")
-//        val sql = "SELECT * FROM PLAYERS ORDER BY id DESC;"
-//        val statement = connection.createStatement()
-//        val playerList = ArrayList<Player>()
-//        try {
-//            val resultSet = statement.executeQuery(sql)
-//            while (resultSet.next())
-//                playerList.add(
-//                    Player(
-//                        resultSet.getInt("id"), resultSet.getString("name"),
-//                        resultSet.getString("surname"), resultSet.getInt("number"),
-//                        resultSet.getInt("footballClubID")
-//                    )
-//                )
-//            return playerList
-//        } catch (e: SQLException) {
-//            println(e.message)
-//            return playerList
-//        } finally {
-//            statement.close()
-//        }
-//    }
+    fun getSort(): List<Player> = executeList("SELECT * FROM PLAYERS ORDER BY id DESC;")
 }

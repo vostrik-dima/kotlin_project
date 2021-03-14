@@ -71,27 +71,7 @@ class FootballClubSponsorDAO(private val connection: Connection) : DAO<FootballC
         }
     }
 
-    override fun getByIdMoreThanTwo(): List<FootballClubSponsor> = executeList("SELECT * FROM FCS WHERE id > 2")
-//        val sql = "SELECT * FROM FCS WHERE id > 2"
-//        val statement = connection.createStatement()
-//        val sponsorList = ArrayList<FootballClubSponsor>()
-//        try {
-//            val resultSet = statement.executeQuery(sql)
-//            while (resultSet.next())
-//                sponsorList.add(
-//                    FootballClubSponsor(
-//                        resultSet.getInt("footballClubID"),
-//                        resultSet.getInt("sponsorID")
-//                    )
-//                )
-//            return sponsorList
-//        } catch (e: SQLException) {
-//            println(e.message)
-//            return sponsorList
-//        } finally {
-//            statement.close()
-//        }
-//    }
+    fun getByIdMoreThanTwo(): List<FootballClubSponsor> = executeList("SELECT * FROM FCS WHERE id > 2")
 
     private fun executeList(sql: String): List<FootballClubSponsor> {
         val statement = connection.createStatement()
@@ -114,27 +94,5 @@ class FootballClubSponsorDAO(private val connection: Connection) : DAO<FootballC
         }
     }
 
-    override fun getSort(): List<FootballClubSponsor> = executeList("SELECT * FROM FCS WHERE ORDER BY id DESC;")
-//        val sql = "SELECT * FROM FCS WHERE ORDER BY id DESC;"
-//        val statement = connection.createStatement()
-//        val sponsorList = ArrayList<FootballClubSponsor>()
-//        try {
-//            val resultSet = statement.executeQuery(sql)
-//            while (resultSet.next())
-//                sponsorList.add(
-//                    FootballClubSponsor(
-//                        resultSet.getInt("footballClubID"),
-//                        resultSet.getInt("sponsorID")
-//                    )
-//                )
-//            return sponsorList
-//        } catch (e: SQLException) {
-//            println(e.message)
-//            return sponsorList
-//        } finally {
-//            statement.close()
-//        }
-//    }
-
-
+    fun getSort(): List<FootballClubSponsor> = executeList("SELECT * FROM FCS WHERE ORDER BY id DESC;")
 }

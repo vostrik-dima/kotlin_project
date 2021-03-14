@@ -1,29 +1,25 @@
 package service
 
 import dao.DAO
+import dao.FootballClubDAO
 import models.*
 import java.sql.Connection
 import java.sql.SQLException
 
 class Service {
-    //5.a
+
+    //6.a
     fun findById(dao: DAO<Player>, id: Int) = dao.getById(id)
     fun findById(dao: DAO<FootballClub>, id: Int) = dao.getById(id)
     fun findById(dao: DAO<Sponsor>, id: Int) = dao.getById(id)
     fun findById(dao: DAO<FootballClubSponsor>, id: Int) = dao.getById(id)
 
-    //5.b
-//    fun getByIdMoreThanTwo(dao: DAO<Player>): List<Any> {
-//       return dao.getByIdMoreThanTwo()
-//    }
-    fun getByIdMoreThanTwo(dao: DAO<Any>): List<Any> {
+    //6.b
+    fun getByIdMoreThanTwo(dao: FootballClubDAO): List<FootballClub> {
         return dao.getByIdMoreThanTwo()
     }
-//    fun getByIdMoreThanTwo(dao: DAO<FootballClub>): List<FootballClub> {
-//        return dao.getByIdMoreThanTwo()
-//    }
 
-    //5.c
+    //6.c
     fun leftJoin(connection: Connection): List<FCPlayers> {
         val sql =
                 "SELECT FOOTBALL_CLUBS.name AS fcName, " +
@@ -77,7 +73,7 @@ class Service {
         }
     }
 
-    //5.d
+    //6.d
     fun selectGroup(connection: Connection): List<FootballClub> {
         val sql = "SELECT * FROM FOOTBALL_CLUBS GROUP BY country"
         val statement = connection.createStatement()
@@ -100,6 +96,6 @@ class Service {
         }
     }
 
-    //5.e
-    fun getByIdSort(dao: DAO<Any>): List<Any> = dao.getSort()
+    //6.e
+    fun byIdSort(dao: FootballClubDAO): List<FootballClub> = dao.getSort()
 }

@@ -1,33 +1,42 @@
+import dao.FootballClubDAO
+import dao.FootballClubSponsorDAO
 import dao.PlayerDAO
-import models.Player
+import dao.SponsorDAO
 import service.Initialization
 import service.Program
+import service.Service
 
 fun main() {
 
-//    try {
-//        val connection = DriverManager.getConnection("jdbc:sqlite:football.db")
-//        println("Connected")
-//    }
-//    catch (e: SQLException) {
-//        println(e.message)
-//    }
-
     val program = Program()
     program.open()
-    val initialization = Initialization()
-    initialization.initialization(program.connection)
+    val initialization = Initialization(program.connection)
+    initialization.initialization()
 
     val playerDAO = PlayerDAO(program.connection)
+    val fcDAO = FootballClubDAO(program.connection)
+    val sponsorDAO = SponsorDAO(program.connection)
+    val fcSpDAO = FootballClubSponsorDAO(program.connection)
 
-    val player = Player(3, "Don", "Paul", 3, 2)
+    val service = Service()
 
-    playerDAO.create(player)
+    //6a
+    val playerById = service.findById(playerDAO, 1)
 
-//    playerDAO.getById(2)
-    val pl = playerDAO.getById(2)
+    //6b
+    val fcGetByIdMoreThanTwo = service.getByIdMoreThanTwo(fcDAO)
 
-    initialization.drop(program.connection)
+    //6c
+    val leftJoin = service.leftJoin(program.connection)
+    val join = service.join(program.connection)
+
+    //6d
+    val group = service.selectGroup(program.connection)
+
+    //6e
+    val sort = service.byIdSort(fcDAO)
+
+    initialization.drop()
     program.close()
 
 }
