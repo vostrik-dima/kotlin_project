@@ -3,10 +3,12 @@ package service
 import dao.CatDao
 import dao.PersonDAO
 import models.PersonWithCat
+import java.util.*
 
 class Service {
 
     var personWithCat: List<PersonWithCat> = ArrayList<PersonWithCat>()
+//    lateinit var personWithCat: List<PersonWithCat>
     private val personDAO = PersonDAO()
     private val catDao = CatDao()
 
@@ -23,5 +25,5 @@ class Service {
     fun groupById(): Map<Int, List<PersonWithCat>> = personWithCat.groupBy { it.id }
 
     //пункт 5d
-    fun countById(id: Int): Int = personWithCat.count { it.id == id }
+    fun countById(predicate: (PersonWithCat) -> Boolean) = personWithCat.filter(predicate).size
 }

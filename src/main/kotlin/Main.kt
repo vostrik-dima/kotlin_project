@@ -6,5 +6,5 @@ fun main() {
     service.zipLists()
     println(service.sortById())
     println(service.groupById())
-    println(service.countById(1))
+    println(service.countById{it.id == 1})
 }
