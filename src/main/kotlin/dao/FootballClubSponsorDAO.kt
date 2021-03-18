@@ -53,11 +53,12 @@ class FootballClubSponsorDAO(private val connection: Connection) : DAO<FootballC
     }
 
     override fun getById(id: Int): FootballClubSponsor? {
-        val sql = "SELECT * FROM FCS WHERE id = $id"
-        val statement = connection.createStatement()
+        val sql = "SELECT * FROM FCS WHERE id = $?"
+        val preparedStatement = connection.prepareStatement(sql)
+        preparedStatement.setString(1, id.toString())
 
         return try {
-            val resultSet = statement.executeQuery(sql)
+            val resultSet = preparedStatement.executeQuery()
             if (resultSet.next()) {
                 FootballClubSponsor(resultSet.getInt("footballClubID"), resultSet.getInt("sponsorID"))
             } else {
@@ -67,7 +68,7 @@ class FootballClubSponsorDAO(private val connection: Connection) : DAO<FootballC
             println(e.message)
             null
         } finally {
-            statement.close()
+            preparedStatement.close()
         }
     }
 

@@ -60,11 +60,12 @@ class PlayerDAO(private val connection: Connection) : DAO<Player> {
     }
 
     override fun getById(id: Int): Player? {
-        val sql = "SELECT * FROM PLAYERS WHERE id = $id;"
-        val statement = connection.createStatement()
+        val sql = "SELECT * FROM PLAYERS WHERE id = ?;"
+        val preparedStatement = connection.prepareStatement(sql)
+        preparedStatement.setString(1, id.toString())
 
         try {
-            val resultSet = statement.executeQuery(sql)
+            val resultSet = preparedStatement.executeQuery()
             return if (resultSet.next()) {
                 Player(
                     resultSet.getInt("id"), resultSet.getString("name"),
@@ -78,7 +79,7 @@ class PlayerDAO(private val connection: Connection) : DAO<Player> {
             println(e.message)
             return null
         } finally {
-            statement.close()
+            preparedStatement.close()
         }
     }
 

@@ -15,9 +15,7 @@ class Service {
     fun findById(dao: DAO<FootballClubSponsor>, id: Int) = dao.getById(id)
 
     //6.b
-    fun getByIdMoreThanTwo(dao: FootballClubDAO): List<FootballClub> {
-        return dao.getByIdMoreThanTwo()
-    }
+    fun getByIdMoreThanTwo(dao: FootballClubDAO): List<FootballClub> = dao.getByIdMoreThanTwo()
 
     //6.c
     fun leftJoin(connection: Connection): List<FCPlayers> {

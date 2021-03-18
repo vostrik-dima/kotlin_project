@@ -55,11 +55,12 @@ class FootballClubDAO(private val connection: Connection) : DAO<FootballClub> {
     }
 
     override fun getById(id: Int): FootballClub? {
-        val sql = "SELECT * FROM FOOTBALL_CLUBS WHERE id = $id"
-        val statement = connection.createStatement()
+        val sql = "SELECT * FROM FOOTBALL_CLUBS WHERE id = ?"
+        val preparedStatement = connection.prepareStatement(sql)
+        preparedStatement.setString(1, id.toString())
 
         try {
-            val resultSet = statement.executeQuery(sql)
+            val resultSet = preparedStatement.executeQuery()
             return if (resultSet.next()) {
                 FootballClub(
                     resultSet.getInt("id"), resultSet.getString("name"),
@@ -72,7 +73,7 @@ class FootballClubDAO(private val connection: Connection) : DAO<FootballClub> {
             println(e.message)
             return null
         } finally {
-            statement.close()
+            preparedStatement.close()
         }
     }
 
