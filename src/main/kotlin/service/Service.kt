@@ -8,14 +8,14 @@ import java.util.*
 class Service {
 
     var personWithCat: List<PersonWithCat> = ArrayList<PersonWithCat>()
-//    lateinit var personWithCat: List<PersonWithCat>
     private val personDAO = PersonDAO()
     private val catDao = CatDao()
 
     // пункт 5a
     fun zipLists() {
-        personWithCat = personDAO.getPersons().zip(catDao.getCats()) {person, cat ->
-            PersonWithCat(person.id, person.name, person.age, cat.nickname, cat.breed, cat.ownerID) }
+        personWithCat = personDAO.getPersons().zip(catDao.getCats()) { person, cat ->
+            PersonWithCat(person.id, person.name, person.age, cat.nickname, cat.breed, cat.ownerID)
+        }
     }
 
     //пункт 5b
