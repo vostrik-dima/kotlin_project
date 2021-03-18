@@ -55,14 +55,12 @@ class SponsorDAO(private val connection: Connection) : DAO<Sponsor> {
     }
 
     override fun getById(id: Int): Sponsor? {
-//        val sql = "SELECT * FROM SPONSORS WHERE id = $id"
-//        val statement = connection.createStatement()
         val sql = "SELECT * FROM SPONSORS WHERE id = ?"
-        val statement = connection.prepareStatement(sql)
-        statement.setString(1, id.toString())
+        val preparedStatement = connection.prepareStatement(sql)
+        preparedStatement.setString(1, id.toString())
 
         try {
-            val resultSet = statement.executeQuery()
+            val resultSet = preparedStatement.executeQuery()
             return if (resultSet.next()) {
                 Sponsor(
                     resultSet.getInt("id"), resultSet.getString("name"),
@@ -75,7 +73,7 @@ class SponsorDAO(private val connection: Connection) : DAO<Sponsor> {
             println(e.message)
             return null
         } finally {
-            statement.close()
+            preparedStatement.close()
         }
     }
 
