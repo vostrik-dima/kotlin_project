@@ -1,6 +1,7 @@
 package service
 
 import java.sql.Connection
+import java.sql.SQLException
 
 class Initialization(private val connection: Connection) {
 
@@ -23,14 +24,13 @@ class Initialization(private val connection: Connection) {
 
         sql = "DROP TABLE IF EXISTS FCS;"
         statement.execute(sql)
-        sql = "CREATE TABLE FCS (FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS," +
-                " FOREIGN KEY (sponsorID) REFERENCES SPONSORS);"
+        sql = "CREATE TABLE FCS (footballClubID INT, sponsorID INT, FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS(id), FOREIGN KEY (sponsorID) REFERENCES SPONSORS(id));"
         statement.execute(sql)
 
         sql = "DROP TABLE IF EXISTS PLAYERS;"
         statement.execute(sql)
         sql = "CREATE TABLE PLAYERS (id INT PRIMARY KEY, name VARCHAR(250), surname VARCHAR(250), " +
-                "number INT, FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS);"
+                "number INT, footballClubID INT, FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS(id));"
         statement.execute(sql)
 
         statement.close()
