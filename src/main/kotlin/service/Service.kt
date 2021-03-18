@@ -22,12 +22,12 @@ class Service {
     //6.c
     fun leftJoin(connection: Connection): List<FCPlayers> {
         val sql =
-                "SELECT FOOTBALL_CLUBS.name AS fcName, " +
-                "PLAYERS.name AS playerName, " +
-                "PLAYERS.surname AS playerSurname" +
-                "FROM FOOTBALL_CLUBS" +
-                "LEFT JOIN PLAYERS" +
-                 "ON FOOTBALL_CLUBS.id = PLAYERS.footballClubID"
+            "SELECT FOOTBALL_CLUBS.name AS fcName, " +
+                    "PLAYERS.name AS playerName, " +
+                    "PLAYERS.surname AS playerSurname " +
+                    "FROM FOOTBALL_CLUBS " +
+                    "LEFT JOIN PLAYERS " +
+                    "ON FOOTBALL_CLUBS.id = PLAYERS.footballClubID"
         val statement = connection.createStatement()
         val sponsorList = ArrayList<FCPlayers>()
         try {
@@ -51,10 +51,10 @@ class Service {
     fun join(connection: Connection): List<FCSp> {
         val sql =
             "SELECT FOOTBALL_CLUBS.name AS fcName, " +
-                    "SPONSORS.name AS spName, " +
-                    "FROM FCS" +
-                    "JOIN FOOTBALL_CLUBS" +
-                    "ON FCS.footballClubID = FOOTBALL_CLUBS.id" +
+                    "SPONSORS.name AS spName " +
+                    "FROM FCS " +
+                    "JOIN FOOTBALL_CLUBS " +
+                    "ON FCS.footballClubID = FOOTBALL_CLUBS.id " +
                     "JOIN SPONSORS ON FCS.sponsorID = SPONSORS.id"
         val statement = connection.createStatement()
         val sponsorList = ArrayList<FCSp>()
@@ -62,7 +62,7 @@ class Service {
             val resultSet = statement.executeQuery(sql)
             while (resultSet.next())
                 sponsorList.add(
-                    FCSp(resultSet.getString("fcName"), resultSet.getString("playerName"))
+                    FCSp(resultSet.getString("fcName"), resultSet.getString("spName"))
                 )
             return sponsorList
         } catch (e: SQLException) {

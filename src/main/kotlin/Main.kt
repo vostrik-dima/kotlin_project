@@ -22,21 +22,26 @@ fun main() {
 
     //6a
     val playerById = service.findById(playerDAO, 1)
+    println(playerById)
 
     //6b
     val fcGetByIdMoreThanTwo = service.getByIdMoreThanTwo(fcDAO)
+    println(fcGetByIdMoreThanTwo)
 
     //6c
     val leftJoin = service.leftJoin(program.connection)
+    println(leftJoin)
     val join = service.join(program.connection)
+    println(join)
 
     //6d
     val group = service.selectGroup(program.connection)
+    println(group)
 
     //6e
     val sort = service.byIdSort(fcDAO)
+    println(sort)
 
     initialization.drop()
     program.close()
-
 }
