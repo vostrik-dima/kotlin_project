@@ -58,16 +58,16 @@ class Service {
                     "JOIN SPONSORS ON FCS.sponsorID = SPONSORS.id"
         val statement = connection.createStatement()
         val sponsorList = ArrayList<FCSp>()
-        try {
+        return try {
             val resultSet = statement.executeQuery(sql)
             while (resultSet.next())
                 sponsorList.add(
                     FCSp(resultSet.getString("fcName"), resultSet.getString("spName"))
                 )
-            return sponsorList
+            sponsorList
         } catch (e: SQLException) {
             println(e.message)
-            return sponsorList
+            sponsorList
         } finally {
             statement.close()
         }
