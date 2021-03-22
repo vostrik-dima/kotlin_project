@@ -2,14 +2,15 @@ package service
 
 import dao.CatDao
 import dao.PersonDAO
+import models.Cat
 import models.PersonWithCat
-import java.util.*
 
 class Service(private val personDAO: PersonDAO, private val catDao: CatDao) {
 
-    private val personWithCat: List<PersonWithCat> = personDAO.getPersons().zip(catDao.getCats()) { person, cat ->
-        PersonWithCat(person.id, person.name, person.age, cat.nickname, cat.breed, cat.ownerID)
-    }
+    private val personWithCat: List<PersonWithCat> = personDAO.getPersons().map { person ->
+            val cat: Cat? = catDao.getCat(person.id)
+            PersonWithCat(person.id, person.name, person.age, cat?.nickname, cat?.breed, cat?.ownerID)
+        }
 
     // пункт 5a
     fun zipLists(): List<PersonWithCat> = personWithCat
