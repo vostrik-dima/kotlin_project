@@ -18,5 +18,4 @@ internal class ExpansionKtTest {
             "shd s".wordCount('c')
         }
     }
-
 }
