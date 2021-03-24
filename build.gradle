@@ -21,6 +21,12 @@ dependencies {
     testImplementation group: 'io.mockk', name: 'mockk', version: '1.11.0'
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 test {
     useJUnitPlatform()
 }
