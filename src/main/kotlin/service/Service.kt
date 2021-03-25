@@ -8,7 +8,7 @@ import models.PersonWithCat
 class Service(private val personDAO: PersonDAO, private val catDao: CatDao) {
 
     private val personWithCat: List<PersonWithCat> = personDAO.getPersons().map { person ->
-            val cat: Cat? = catDao.getCat(person.id)
+            val cat = catDao.getCat(person.id)
             PersonWithCat(person.id, person.name, person.age, cat?.nickname, cat?.breed, cat?.ownerID)
         }
 
