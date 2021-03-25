@@ -2,7 +2,6 @@ package service
 
 import dao.CatDao
 import dao.PersonDAO
-import models.Cat
 import models.PersonWithCat
 
 class Service(private val personDAO: PersonDAO, private val catDao: CatDao) {
