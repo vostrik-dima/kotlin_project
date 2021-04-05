@@ -11,6 +11,7 @@ class Initialization(private val connection: Connection) {
     }
 
     private fun schema() {
+
         var sql = "DROP TABLE IF EXISTS FOOTBALL_CLUBS;"
         val statement = connection.createStatement()
         statement.execute(sql)
@@ -32,6 +33,12 @@ class Initialization(private val connection: Connection) {
         sql = "CREATE TABLE PLAYERS (id INT PRIMARY KEY, name VARCHAR(250), surname VARCHAR(250), " +
                 "number INT, footballClubID INT, FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS(id));"
         statement.execute(sql)
+
+        try {
+            statement.execute(sql)
+        } catch (e: SQLException) {
+            val a = 1
+        }
 
         statement.close()
     }

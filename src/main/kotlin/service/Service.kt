@@ -1,31 +1,30 @@
 package service
 
-import dao.DAO
 import dao.FootballClubDAO
+import dao.PlayerDAO
 import models.*
 import java.sql.Connection
 import java.sql.SQLException
 
-class Service {
+class Service(private val connection: Connection, private val fcDAO: FootballClubDAO) {
 
     //6.a
-    fun findById(dao: DAO<Player>, id: Int) = dao.getById(id)
-    fun findById(dao: DAO<FootballClub>, id: Int) = dao.getById(id)
-    fun findById(dao: DAO<Sponsor>, id: Int) = dao.getById(id)
-    fun findById(dao: DAO<FootballClubSponsor>, id: Int) = dao.getById(id)
+    fun findById(dao: PlayerDAO, id: Int) = dao.getById(id)
 
     //6.b
-    fun getByIdMoreThanTwo(dao: FootballClubDAO): List<FootballClub> = dao.getByIdMoreThanTwo()
+    fun getByIdMoreThanTwo(): List<FootballClub> = fcDAO.getByIdMoreThanTwo()
 
     //6.c
-    fun leftJoin(connection: Connection): List<FCPlayers> {
+    fun leftJoin(): List<FCPlayers> {
         val sql =
-            "SELECT FOOTBALL_CLUBS.name AS fcName, " +
-                    "PLAYERS.name AS playerName, " +
-                    "PLAYERS.surname AS playerSurname " +
-                    "FROM FOOTBALL_CLUBS " +
-                    "LEFT JOIN PLAYERS " +
-                    "ON FOOTBALL_CLUBS.id = PLAYERS.footballClubID"
+            """
+                SELECT FOOTBALL_CLUBS.name AS fcName, 
+                PLAYERS.name AS playerName, 
+                PLAYERS.surname AS playerSurname 
+                FROM FOOTBALL_CLUBS 
+                LEFT JOIN PLAYERS 
+                ON FOOTBALL_CLUBS.id = PLAYERS.footballClubID
+            """.trimIndent()
         val statement = connection.createStatement()
         val sponsorList = ArrayList<FCPlayers>()
         try {
@@ -46,7 +45,7 @@ class Service {
         }
     }
 
-    fun join(connection: Connection): List<FCSp> {
+    fun join(): List<FCSp> {
         val sql =
             "SELECT FOOTBALL_CLUBS.name AS fcName, " +
                     "SPONSORS.name AS spName " +
@@ -72,7 +71,7 @@ class Service {
     }
 
     //6.d
-    fun selectGroup(connection: Connection): List<FootballClub> {
+    fun selectGroup(): List<FootballClub> {
         val sql = "SELECT * FROM FOOTBALL_CLUBS GROUP BY country"
         val statement = connection.createStatement()
         val fcList = ArrayList<FootballClub>()
@@ -95,5 +94,5 @@ class Service {
     }
 
     //6.e
-    fun byIdSort(dao: FootballClubDAO): List<FootballClub> = dao.getSort()
+    fun byIdSort(): List<FootballClub> = fcDAO.getSort()
 }
