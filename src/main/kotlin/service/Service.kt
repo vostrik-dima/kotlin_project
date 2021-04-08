@@ -32,7 +32,8 @@ class Service(private val connection: Connection, private val fcDAO: FootballClu
             while (resultSet.next())
                 sponsorList.add(
                     FCPlayers(
-                        resultSet.getString("fcName"), resultSet.getString("playerName"),
+                        resultSet.getString("fcName"),
+                        resultSet.getString("playerName"),
                         resultSet.getString("playerSurname")
                     )
                 )
@@ -59,7 +60,10 @@ class Service(private val connection: Connection, private val fcDAO: FootballClu
             val resultSet = statement.executeQuery(sql)
             while (resultSet.next())
                 sponsorList.add(
-                    FCSp(resultSet.getString("fcName"), resultSet.getString("spName"))
+                    FCSp(
+                        resultSet.getString("fcName"),
+                        resultSet.getString("spName")
+                    )
                 )
             sponsorList
         } catch (e: SQLException) {
@@ -80,7 +84,8 @@ class Service(private val connection: Connection, private val fcDAO: FootballClu
             while (resultSet.next())
                 fcList.add(
                     FootballClub(
-                        resultSet.getInt("id"), resultSet.getString("name"),
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
                         resultSet.getString("country")
                     )
                 )

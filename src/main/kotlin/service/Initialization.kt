@@ -34,12 +34,6 @@ class Initialization(private val connection: Connection) {
                 "number INT, footballClubID INT, FOREIGN KEY (footballClubID) REFERENCES FOOTBALL_CLUBS(id));"
         statement.execute(sql)
 
-        try {
-            statement.execute(sql)
-        } catch (e: SQLException) {
-            val a = 1
-        }
-
         statement.close()
     }
 
