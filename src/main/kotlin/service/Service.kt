@@ -47,13 +47,12 @@ class Service(private val connection: Connection, private val fcDAO: FootballClu
     }
 
     fun join(): List<FCSp> {
-        val sql =
-            "SELECT FOOTBALL_CLUBS.name AS fcName, " +
-                    "SPONSORS.name AS spName " +
-                    "FROM FCS " +
-                    "JOIN FOOTBALL_CLUBS " +
-                    "ON FCS.footballClubID = FOOTBALL_CLUBS.id " +
-                    "JOIN SPONSORS ON FCS.sponsorID = SPONSORS.id"
+        val sql = """
+            SELECT FOOTBALL_CLUBS.name AS fcName, SPONSORS.name AS spName
+            FROM FCS
+            JOIN FOOTBALL_CLUBS ON FCS.footballClubID = FOOTBALL_CLUBS.id 
+            JOIN SPONSORS ON FCS.sponsorID = SPONSORS.id
+        """.trimIndent()
         val statement = connection.createStatement()
         val sponsorList = ArrayList<FCSp>()
         return try {
