@@ -29,6 +29,7 @@ class Initialization(private val connection: Connection) {
     private fun data() {
         //FOOTBALL_CLUBS
         val statement = connection.createStatement()
+
         statement.execute("INSERT INTO FOOTBALL_CLUBS (id, name, country) VALUES(1, 'Liverpool', 'England')")
         statement.execute("INSERT INTO FOOTBALL_CLUBS (id, name, country) VALUES(2, 'Real Madrid', 'Spain')")
         statement.execute("INSERT INTO FOOTBALL_CLUBS (id, name, country) VALUES(3, 'Monaco', 'France')")
@@ -52,11 +53,12 @@ class Initialization(private val connection: Connection) {
     }
 
     fun drop() {
-        val statement = connection.createStatement()
-        statement.execute("DROP TABLE IF EXISTS FOOTBALL_CLUBS")
-        statement.execute("DROP TABLE IF EXISTS SPONSORS")
-        statement.execute("DROP TABLE IF EXISTS FCS")
-        statement.execute("DROP TABLE IF EXISTS PLAYERS")
-        statement.close()
+        with(connection.createStatement()) {
+            execute("DROP TABLE IF EXISTS FOOTBALL_CLUBS")
+            execute("DROP TABLE IF EXISTS SPONSORS")
+            execute("DROP TABLE IF EXISTS FCS")
+            execute("DROP TABLE IF EXISTS PLAYERS")
+            close()
+        }
     }
 }
