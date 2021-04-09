@@ -11,4 +11,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.34.0'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-jdbc', version: '0.12.213'
+
 }
