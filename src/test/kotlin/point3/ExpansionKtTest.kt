@@ -1,11 +1,10 @@
 package point3
 
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
 
-internal class ExpansionKtTest {
+class ExpansionKtTest {
 
     @Test
     fun wordCount() {
@@ -14,7 +13,7 @@ internal class ExpansionKtTest {
 
     @Test
     fun wrongChar() {
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             "shd s".wordCount('c')
         }
     }
